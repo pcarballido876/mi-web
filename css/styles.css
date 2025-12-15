@@ -1029,7 +1029,8 @@
 
 
 .flag-icon {
-  width: 20px;
+  width: 18px;
   height: auto;
   vertical-align: middle;
+  margin-left: 6px;
 }
