@@ -1024,4 +1024,12 @@
   font-size: 14px;
   color: #555;
   line-height: 1.4;
+
+}
+
+
+.flag-icon {
+  width: 20px;
+  height: auto;
+  vertical-align: middle;
 }
