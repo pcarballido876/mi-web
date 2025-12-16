@@ -26,7 +26,7 @@
                 <li><a href="about.html">ABOUT US</a></li>
                 <li><a href="business.html">BUSINESS LINES</a></li>
                 <li><a href="quality.html">QUALITY SYSTEMS</a></li>
-                <li><a href="news.html">NEWS</a></li>
+                <li><a href="news.html">CLIENT PORTAL</a></li>
                 <li><a href="customers.html">OUR TEAM</a></li>
                 <li><a href="contact.html">CONTACT</a></li>
             </ul>
@@ -34,7 +34,7 @@
     </nav>
 </header>
 
-</body>
+
 
 
 
@@ -47,7 +47,7 @@
 
     <div class="about-content">
       <div class="about-text">
-        <h2>A Trusted Global Aviation Supplier</h2>
+        <h2>A Trusted Global Aviation Supplier <i class="fa-solid fa-certificate"></i></h2>
         <p><strong>VENTO Aviation</strong> specializes in sourcing, stocking and delivering certified aircraft components worldwide.</p>
         <p>We supply new, serviceable and overhauled components, backed by full traceability and regulatory compliance.</p>
         <p><strong>Global reach. Transparent service. Fast logistics.</strong></p>
@@ -60,15 +60,15 @@
 
     <div class="values-grid">
       <div class="value-card">
-        <h3>✔️ Mission</h3>
+        <h3><i class="fa-solid fa-flag-checkered"></i> Mission</h3>
         <p>Deliver certified aviation parts with speed and reliability.</p>
       </div>
       <div class="value-card">
-        <h3>✔️ Vision</h3>
+        <h3></i><i class="fa-solid fa-binoculars"></i> Vision</h3>
         <p>Become a trusted global aviation supply partner.</p>
       </div>
       <div class="value-card">
-        <h3>✔️ Values</h3>
+        <h3><i class="fa-solid fa-scale-balanced"></i> Values</h3>
         <p>Integrity, Quality, Compliance, Speed.</p>
       </div>
     </div>
@@ -79,20 +79,20 @@
 <!-- Testimonials Section with Sliding Cards and Counters -->
 	<section class="testimonials-section" style="padding: 60px 0; background: #f5f7fa;">
 		<div class="container" style="max-width: 1100px; margin: auto;">
-		<h2 style="text-align: center; font-size: 32px; margin-bottom: 30px;">What Our Clients Say</h2>
+		<h2 style="text-align: center; font-size: 32px; margin-bottom: 30px;">What Our Clients Say <i class="fa-solid fa-handshake"></i></h2>
 
 
 		<!-- Slider Wrapper -->
-		<div class="slider" style="display: flex; overflow-x: auto; gap: 20px; scroll-snap-type: x mandatory; padding-bottom: 10px;">
+		<!--<div class="slider" style="display: flex; overflow-x: auto; gap: 20px; scroll-snap-type: x mandatory; padding-bottom: 10px;">
 		<div class="testimonial-card" style="min-width: 300px; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); scroll-snap-align: start;">
-		<p>“Excellent support and quick turnaround. VENTO always delivers.”</p>
+		<p >"Excellent support and quick turnaround. VENTO always delivers."></p>
 		<h4>- MRO Supplier</h4>
 		</div>
 
 
 		<div class="testimonial-card" style="min-width: 300px; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); scroll-snap-align: start;">
 		<p>“Reliable, fast, and professional. An ideal partner for aircraft components.”</p>
-		<h4>- Airline Procurement Manager</h4>
+		<h4 class="author">- MRO Supplier</h4>
 		</div>
 
 
@@ -100,18 +100,29 @@
 		<p>“Their global network really shortens lead times. Highly recommended.”</p>
 		<h4>- Fleet Manager</h4>
 		</div>
+		
+		
+	</div>-->
+	
+	<!-- Testimonials Section -->
+	
+	<div class="testimonial-wrapper">
+	  <div class="testimonial-card" id="testimonial-card">
+		<div class="story-bar"></div>
+		<p id="testimonial-text"></p>
+		<h4 id="testimonial-author"></h4>
+	  </div>
 	</div>
-
-
+	
 	<!-- Counters Section -->
 	<div class="counters" style="display: flex; justify-content: space-around; margin-top: 60px; text-align: center;">
 		<div>
 		<h3 id="counter1" style="font-size: 40px; margin: 0;">0</h3>
-		<p><b>Parts in Stock</b><br>Available across all major ATA chapters.</p>
+		<p><b><i class="fa-solid fa-boxes-stacked"></i> Parts in Stock</b><br>Available across all major ATA chapters.</p>
 		</div>
 		<div>
 		<h3 id="counter2" style="font-size: 40px; margin: 0;">0</h3>
-		<p><b>Parts Delivered Worldwide</b><br>Supporting airlines, MROs & operators globally.</p>
+		<p><b><i class="fa-solid fa-truck-fast"></i> Parts Delivered Worldwide</b><br>Supporting airlines, MROs & operators globally.</p>
 		</div>
 		</div>
 	</div>
@@ -203,6 +214,71 @@ document.addEventListener("DOMContentLoaded", function () {
   observer.observe(counters);
 
 });
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const testimonials = [
+    {
+      text: "Excellent support and quick turnaround. VENTO always delivers.",
+      author: "- MRO Supplier"
+    },
+    {
+      text: "Reliable, fast, and professional. An ideal partner for aircraft components.",
+      author: "- Airline Procurement Manager"
+    },
+    {
+      text: "Their global network really shortens lead times. Highly recommended.",
+      author: "- Fleet Manager"
+    }
+  ];
+
+  const card = document.getElementById("testimonial-card");
+  const textEl = document.getElementById("testimonial-text");
+  const authorEl = document.getElementById("testimonial-author");
+  const bar = document.querySelector(".story-bar");
+
+  let index = 0;
+  const duration = 4000;
+
+  function showTestimonial(i) {
+    // ocultar tarjeta
+    card.classList.add("hide");
+    card.classList.remove("show");
+
+    setTimeout(() => {
+      textEl.textContent = "“" + testimonials[i].text + "”";
+      authorEl.textContent = testimonials[i].author;
+
+      // reset barra
+      bar.style.width = "0%";
+      bar.animate(
+        [{ width: "0%" }, { width: "100%" }],
+        { duration: duration, easing: "linear" }
+      );
+
+      // mostrar tarjeta nueva
+      card.classList.remove("hide");
+      card.classList.add("show");
+
+    }, 400);
+  }
+
+  showTestimonial(index);
+
+  setInterval(() => {
+    index = (index + 1) % testimonials.length;
+    showTestimonial(index);
+  }, duration);
+
+});
+
 </script>
 	
 	
