@@ -42,29 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* =========================
-       CTA BUTTONS
-    ========================= */
-    const ctaButton = document.querySelector('.cta-button');
-    if (ctaButton) {
-        ctaButton.addEventListener('click', () => {
-            const contact = document.querySelector('#contact');
-            if (contact) contact.scrollIntoView({ behavior: 'smooth' });
-        });
-    }
-
-    const heroCta = document.querySelector('.hero-cta');
-    if (heroCta) {
-        heroCta.addEventListener('click', () => {
-            const business = document.querySelector('#business');
-            if (business) business.scrollIntoView({ behavior: 'smooth' });
-        });
-    }
-
-    /* =========================
        🌍 MAP PINS TOOLTIPS
     ========================= */
     document.querySelectorAll('.map-pin').forEach(pin => {
-
         let tooltip;
 
         pin.addEventListener('mouseenter', () => {
@@ -87,25 +67,81 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* =========================
-       COUNTERS (solo si existen)
+       TESTIMONIALS CAROUSEL
+    ========================= */
+    const testimonials = [
+        {
+            text: "Excellent support and quick turnaround. VENTO always delivers.",
+            author: "- MRO Supplier"
+        },
+        {
+            text: "Reliable, fast, and professional. An ideal partner for aircraft components.",
+            author: "- Airline Procurement Manager"
+        },
+        {
+            text: "Their global network really shortens lead times. Highly recommended.",
+            author: "- Fleet Manager"
+        }
+    ];
+
+    const testimonialCard = document.getElementById("testimonial-card");
+    const textEl = document.getElementById("testimonial-text");
+    const authorEl = document.getElementById("testimonial-author");
+    const bar = document.querySelector(".story-bar");
+
+    if (testimonialCard && textEl && authorEl && bar) {
+        let index = 0;
+        const duration = 4000;
+
+        function showTestimonial(i) {
+            testimonialCard.classList.add("hide");
+            testimonialCard.classList.remove("show");
+
+            setTimeout(() => {
+                textEl.textContent = "“" + testimonials[i].text + "”";
+                authorEl.textContent = testimonials[i].author;
+
+                bar.style.width = "0%";
+                bar.animate(
+                    [{ width: "0%" }, { width: "100%" }],
+                    { duration: duration, easing: "linear" }
+                );
+
+                testimonialCard.classList.remove("hide");
+                testimonialCard.classList.add("show");
+            }, 400);
+        }
+
+        if (testimonials.length > 0) {
+            showTestimonial(index);
+
+            setInterval(() => {
+                index = (index + 1) % testimonials.length;
+                showTestimonial(index);
+            }, duration);
+        }
+    }
+
+    /* =========================
+       COUNTERS
     ========================= */
     const countersContainer = document.querySelector('.counters');
 
     if (countersContainer) {
-
         function animateCounter(id, target) {
             let count = 0;
             const step = target / 200;
+            const element = document.getElementById(id);
+            
+            if (!element) return;
 
             function update() {
                 count += step;
                 if (count < target) {
-                    document.getElementById(id).textContent =
-                        Math.floor(count).toLocaleString();
+                    element.textContent = Math.floor(count).toLocaleString();
                     requestAnimationFrame(update);
                 } else {
-                    document.getElementById(id).textContent =
-                        target.toLocaleString();
+                    element.textContent = target.toLocaleString();
                 }
             }
             update();
@@ -117,10 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 animateCounter('counter2', 400000);
                 observer.disconnect();
             }
-        });
+        }, { threshold: 0.4 });
 
         observer.observe(countersContainer);
     }
 
 });
-
