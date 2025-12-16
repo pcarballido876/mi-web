@@ -177,13 +177,104 @@
         </div>
     </footer>
 	
-	<script src="/js/main.js" defer></script>
+	<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  function animateCounter(id, target) {
+    let count = 0;
+    const speed = target / 200;
+
+    const update = () => {
+      count += speed;
+      if (count < target) {
+        document.getElementById(id).textContent =
+          Math.floor(count).toLocaleString();
+        requestAnimationFrame(update);
+      } else {
+        document.getElementById(id).textContent =
+          target.toLocaleString();
+      }
+    };
+
+    update();
+  }
+
+  const counters = document.querySelector('.counters');
+
+  if (!counters) return;
+
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      animateCounter('counter1', 85000);
+      animateCounter('counter2', 400000);
+      observer.disconnect();
+    }
+  }, { threshold: 0.4 });
+
+  observer.observe(counters);
+
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const testimonials = [
+    {
+      text: "Excellent support and quick turnaround. VENTO always delivers.",
+      author: "- MRO Supplier"
+    },
+    {
+      text: "Reliable, fast, and professional. An ideal partner for aircraft components.",
+      author: "- Airline Procurement Manager"
+    },
+    {
+      text: "Their global network really shortens lead times. Highly recommended.",
+      author: "- Fleet Manager"
+    }
+  ];
+
+  const card = document.getElementById("testimonial-card");
+  const textEl = document.getElementById("testimonial-text");
+  const authorEl = document.getElementById("testimonial-author");
+  const bar = document.querySelector(".story-bar");
+
+  let index = 0;
+  const duration = 4000;
+
+  function showTestimonial(i) {
+    // ocultar tarjeta
+    card.classList.add("hide");
+    card.classList.remove("show");
+
+    setTimeout(() => {
+      textEl.textContent = "“" + testimonials[i].text + "”";
+      authorEl.textContent = testimonials[i].author;
+
+      // reset barra
+      bar.style.width = "0%";
+      bar.animate(
+        [{ width: "0%" }, { width: "100%" }],
+        { duration: duration, easing: "linear" }
+      );
+
+      // mostrar tarjeta nueva
+      card.classList.remove("hide");
+      card.classList.add("show");
+
+    }, 400);
+  }
+
+  showTestimonial(index);
+
+  setInterval(() => {
+    index = (index + 1) % testimonials.length;
+    showTestimonial(index);
+  }, duration);
+
+});
+
+</script>
 	
 	
 	
 	</body>
 </html>
-
-
-
-
